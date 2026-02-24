@@ -1,0 +1,23 @@
+CREATE DATABASE transport_db;
+
+USE transport_db;
+
+CREATE TABLE bus_routes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    bus_name VARCHAR(100),
+    start_point VARCHAR(100),
+    end_point VARCHAR(100),
+    eta INT, -- estimated arrival in minutes
+    cost DECIMAL(10,2),
+    eco_rating VARCHAR(20), -- e.g., "High", "Medium", "Low"
+    comfort_level VARCHAR(20), -- e.g., "Basic", "Premium"
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert sample bus data
+INSERT INTO bus_routes (bus_name, start_point, end_point, eta, cost, eco_rating, comfort_level)
+VALUES
+('Borivali Express', 'Borivali', 'Andheri', 35, 15.00, 'High', 'Basic'),
+('GreenLine Electric', 'Borivali', 'Churchgate', 50, 20.00, 'High', 'Premium'),
+('Metro Shuttle', 'Borivali', 'Goregaon', 25, 10.00, 'Medium', 'Basic'),
+('ComfortRide AC', 'Borivali', 'Thane', 40, 30.00, 'Low', 'Premium');
