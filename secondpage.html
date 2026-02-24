@@ -132,3 +132,38 @@
     </script>
 </body>
 </html>
+async function fetchRealTimeData() {
+    if(!selectedTransport) { alert("Please select a mode of transport!"); return; }
+
+    const output = document.getElementById('data-output');
+    const loader = document.getElementById('loader');
+    const resultsArea = document.getElementById('results-area');
+    const priority = document.getElementById('priority').value;
+
+    resultsArea.style.display = "block";
+    output.innerHTML = "";
+    loader.style.display = "block";
+
+    // Fetch from backend
+    const response = await fetch(`http://localhost:3000/bus-routes?priority=${priority}`);
+    const routes = await response.json();
+
+    loader.style.display = "none";
+
+    if (routes.length > 0) {
+        const bestRoute = routes[0]; // pick optimized route
+        output.innerHTML = `
+            <h3 style="color:#2575fc">Optimized Bus Route Found!</h3>
+            <hr style="margin:10px 0; border:0; border-top:1px solid #eee">
+            <p><b>Bus:</b> ${bestRoute.bus_name}</p>
+            <p><b>From:</b> ${bestRoute.start_point} → <b>To:</b> ${bestRoute.end_point}</p>
+            <p><b>Estimated Arrival:</b> ${bestRoute.eta} mins</p>
+            <p><b>Estimated Cost:</b> $${bestRoute.cost}</p>
+            <p><b>Comfort:</b> ${bestRoute.comfort_level}</p>
+            <p><b>Eco Rating:</b> ${bestRoute.eco_rating}</p>
+            <p style="font-size:12px; color:green; margin-top:10px;">✓ Route matches your <b>${priority}</b> preference.</p>
+        `;
+    } else {
+        output.innerHTML = "<p>No routes found for this preference.</p>";
+    }
+}
