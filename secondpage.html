@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Routes | Smart Communication</title>
+    <style>
+        /* Modern UI Styling */
+        body { font-family: 'Inter', sans-serif; background: #f0f2f5; padding: 20px; color: #1a1a1a; }
+        .card {
+            background: white; max-width: 600px; margin: 0 auto;
+            padding: 30px; border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h2 { font-weight: 800; letter-spacing: -0.5px; }
+
+        /* Real-time Status Indicator */
+        .live-badge {
+            display: inline-block; padding: 5px 12px; background: #e1ffed;
+            color: #10b981; border-radius: 20px; font-size: 12px;
+            font-weight: bold; margin-bottom: 20px;
+        }
+
+        select {
+            width: 100%; padding: 15px; margin-bottom: 20px;
+            border-radius: 12px; border: 2px solid #f0f0f0;
+            font-size: 16px; transition: 0.3s;
+        }
+
+        .transport-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 15px;
+        }
+
+        /* Clickable Mode Items */
+        .mode-item {
+            padding: 20px; border: 2px solid #f0f0f0; border-radius: 16px;
+            cursor: pointer; transition: 0.3s; text-align: center;
+        }
+        .mode-item:hover { border-color: #2575fc; background: #f8fbff; }
+        .mode-item.selected { border-color: #2575fc; background: #eef4ff; }
+
+        .finish-btn {
+            width: 100%; margin-top: 30px; padding: 18px;
+            background: #2575fc; color: white; border: none;
+            border-radius: 15px; font-weight: bold; cursor: pointer;
+        }
+
+        /* Results Display Section */
+        #results-area {
+            margin-top: 25px; padding: 20px; border-radius: 15px;
+            background: #fafafa; display: none; /* Hidden until calculation */
+        }
+        .loading-spinner {
+            border: 4px solid #f3f3f3; border-top: 4px solid #2575fc;
+            border-radius: 50%; width: 30px; height: 30px;
+            animation: spin 1s linear infinite; margin: 10px auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="live-badge">● LIVE DATA CONNECTED</div>
+        <h2>Optimize Journey</h2>
+        <p style="color: #666; margin-bottom: 20px;">Fetching best routes based on current traffic...</p>
+
+        <label style="display:block; text-align:left; font-weight:600; margin-bottom:5px;">Priority</label>
+        <select id="priority">
+            <option value="cheap">Cheapest Rate</option>
+            <option value="comfort">Maximum Comfort</option>
+            <option value="eco">Eco-Friendly (Low Carbon)</option>
+            <option value="short">Shortest Time</option>
+        </select>
+
+        <div class="transport-grid">
+            <div class="mode-item" onclick="selectMode(this, 'Electric Bus')">⚡ Electric Bus</div>
+            <div class="mode-item" onclick="selectMode(this, 'Train')">🚆 Train</div>
+            <div class="mode-item" onclick="selectMode(this, 'Car')">🚗 Car</div>
+            <div class="mode-item" onclick="selectMode(this, 'Plane')">✈️ Plane</div>
+        </div>
+
+        <button class="finish-btn" onclick="fetchRealTimeData()">Calculate Real-Time Route</button>
+
+        <div id="results-area">
+            <div id="loader" style="display:none;"><div class="loading-spinner"></div><p>Syncing with satellites...</p></div>
+            <div id="data-output"></div>
+        </div>
+    </div>
+
+    <script>
+        let selectedTransport = "";
+
+        function selectMode(element, mode) {
+            // Remove 'selected' class from all
+            document.querySelectorAll('.mode-item').forEach(el => el.classList.remove('selected'));
+            // Add to clicked
+            element.classList.add('selected');
+            selectedTransport = mode;
+        }
+
+        async function fetchRealTimeData() {
+            if(!selectedTransport) { alert("Please select a mode of transport!"); return; }
+
+            const output = document.getElementById('data-output');
+            const loader = document.getElementById('loader');
+            const resultsArea = document.getElementById('results-area');
+            const priority = document.getElementById('priority').value;
+
+            resultsArea.style.display = "block";
+            output.innerHTML = "";
+            loader.style.display = "block";
+
+            // SIMULATING API CALL (Real-time Latency)
+            setTimeout(() => {
+                loader.style.display = "none";
+                
+                // Logic based on Priority Selection
+                let eta = Math.floor(Math.random() * 60) + 10; // Simulated real-time minutes
+                let cost = (Math.random() * 50 + 5).toFixed(2);
+                
+                output.innerHTML = `
+                    <h3 style="color:#2575fc">Optimized Route Found!</h3>
+                    <hr style="margin:10px 0; border:0; border-top:1px solid #eee">
+                    <p><b>Mode:</b> ${selectedTransport}</p>
+                    <p><b>Estimated Arrival:</b> ${eta} mins (Live Traffic)</p>
+                    <p><b>Estimated Cost:</b> $${cost}</p>
+                    <p style="font-size:12px; color:green; margin-top:10px;">✓ Route matches your <b>${priority}</b> preference.</p>
+                `;
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
