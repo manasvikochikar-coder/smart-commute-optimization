@@ -3,51 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smart Communication | Join Us</title>
-   <style>
-    body {
-    /* Deep Navy Radial Gradient for a spotlight effect */
-    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.glass-card {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    <title>Join the Elite | Royal E-Com</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     
-    /* The Gold Border - This is what makes it look Royal */
-    border: 1px solid #d4af37; 
-    
-    border-radius: 24px;
-    padding: 40px;
-    width: 380px;
-    /* Soft shadow with a hint of navy */
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    color: white;
-}
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
-.btn {
-    background: #d4af37; /* Gold Button */
-    color: #0f172a;    /* Navy Text for contrast */
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 700;
-}
-</style>
+        body {
+            background: #0F172A;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #F8FAFC;
+        }
+
+        /* The Main Container */
+        .signup-container {
+            display: flex;
+            width: 900px;
+            height: 600px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(197, 160, 89, 0.2);
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.5);
+        }
+
+        /* Side 1: The Branding/Image */
+        .brand-side {
+            flex: 1;
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
+                        url('https://images.unsplash.com/photo-1513519245088-0e12902e35ca?auto=format&fit=crop&q=80&w=1000');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+            border-right: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .brand-side h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #C5A059;
+            margin-bottom: 10px;
+        }
+
+        /* Side 2: The Form */
+        .form-side {
+            flex: 1.2;
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 8px; }
+        p.subtitle { color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px; }
+
+        .input-group { margin-bottom: 15px; }
+        label { display: block; font-size: 12px; color: #C5A059; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px; }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: white;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus { border-color: #C5A059; background: rgba(255, 255, 255, 0.08); }
+
+        .btn {
+            background: linear-gradient(135deg, #C5A059, #92733E);
+            color: #0F172A;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(197, 160, 89, 0.3); }
+
+        .login-link { text-align: center; margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.4); }
+        .login-link a { color: #C5A059; text-decoration: none; }
+
+        /* Responsive Logic (Mobile) */
+        @media (max-width: 768px) {
+            .signup-container { flex-direction: column; width: 90%; height: auto; }
+            .brand-side { display: none; } /* Hide image on small phones to save space */
+        }
     </style>
 </head>
 <body>
 
-    <div class="glass-card">
-        <h2>Smart Communication</h2>
-        <form action="index.html"> <input type="text" placeholder="Username" required>
-            <input type="password" placeholder="Password" required>
-            <button type="submit" class="btn">Get Started</button>
-        </form>
+    <div class="signup-container">
+        <div class="brand-side">
+            <h1>The Royal Collection</h1>
+            <p>Experience the finest craftsmanship in digital retail.</p>
+        </div>
+
+        <div class="form-side">
+            <h2>Create Account</h2>
+            <p class="subtitle">Join our exclusive circle of shoppers.</p>
+            
+            <form>
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="John Doe">
+                </div>
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" placeholder="john@example.com">
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••">
+                </div>
+                
+                <button type="submit" class="btn">Begin Journey</button>
+            </form>
+
+            <p class="login-link">Already a member? <a href="#">Sign In</a></p>
+        </div>
     </div>
 
 </body>
